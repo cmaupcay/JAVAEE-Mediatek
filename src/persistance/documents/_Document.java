@@ -1,7 +1,5 @@
 package persistance.documents;
 
-import java.sql.PreparedStatement;
-
 import mediatek2022.Document;
 import mediatek2022.Utilisateur;
 
