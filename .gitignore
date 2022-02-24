@@ -1,4 +1,8 @@
+src/mediatek2022
+src/.old
+
 .vscode/
+
 # Compiled class file
 *.class
 
