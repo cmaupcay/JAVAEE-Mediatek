@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Exportation des fichiers de l'application vers Apache Tomcat.
+
+INITIAL=$PWD
+cd $(dirname $0)
+DESTINATION=$(realpath "../apache-tomcat/webapps/mediatek/WEB-INF")
+
+echo "Exportation du fichier web.xml..."
+if [ -f $DESTINATION/web.xml ]
+then
+    rm $DESTINATION/web.xml
+fi
+cp ../web.xml $DESTINATION/
+
+echo "Exportation des pages JSP..."
+if [ -d $DESTINATION/jsp ]
+then
+    rm -rf $DESTINATION/jsp
+fi
+cp -r ../jsp $DESTINATION/
+
+echo "Fini."
+cd $INITIAL

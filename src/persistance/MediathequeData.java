@@ -15,20 +15,19 @@ import persistance.utilisateurs.Abonne;
 import persistance.utilisateurs.Bibliothecaire;
 import persistance.utilisateurs._Utilisateur;
 
-// classe mono-instance  dont l'unique instance est connue de la médiathèque
-// via une auto-déclaration dans son bloc static
-
+// TOCOMMENT
 public class MediathequeData implements PersistentMediatheque
 {
-// Jean-François Brette 01/01/2018
 	static 
 	{
+		// Déclaration à la Médiathèque (instance unique).
 		Mediatheque.getInstance().setData(new MediathequeData());
 	}
 
-	private static String URL = "jdbc:mysql://localhost:3306";
-	private static String USR = "root";
-	private static String MDP = "";
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String URL = "jdbc:mysql://localhost:3306";
+	private static final String USR = "root";
+	private static final String MDP = "";
 
 	private Connection connexion;
 	private final boolean connexion_valide()
@@ -37,9 +36,9 @@ public class MediathequeData implements PersistentMediatheque
 		catch (SQLException e) { return false; }
 	}
 
-	private MediathequeData() 
+	public MediathequeData() 
 	{
-		try { Class.forName("com.mysql.jdbc.Driver"); }
+		try { Class.forName(DRIVER); }
 		catch (ClassNotFoundException e)
 		{ e.printStackTrace(); }
 		

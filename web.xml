@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0" metadata-complete="true">
+
+  <display-name>Mediatek</display-name>
+  <description>
+    Plateforme web de la médiathèque.
+  </description>
+
+  <context-param>
+    <param-name>persistance</param-name>
+    <param-value>persistance.MediathequeData</param-value>
+  </context-param>
+
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>services.Test</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+</web-app>

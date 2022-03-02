@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Démarrage d'Apache Tomcat et ouverture de l'accueil de la Mediatek.
+
+INITIAL=$PWD
+cd $(dirname $0)
+
+echo "Démarrage d'Apache Tomcat..."
+../apache-tomcat/bin/startup.sh
+if [ ! $? -eq 0 ]
+then
+    echo "Le démarrage d'Apache Tomcat a échoué."
+    exit
+fi
+
+echo "Ouverture de la Mediatek sur le navigateur..."
+python -mwebbrowser http://localhost:8080/mediatek/
+
+echo "Fini."
+cd $INITIAL
