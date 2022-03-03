@@ -1,5 +1,7 @@
 package services;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +21,7 @@ public class Test extends Service
     @Override
     protected void GET_pre(HttpServletRequest requete, HttpServletResponse reponse)
     {
+        requete.setAttribute("documents", MEDIATHEQUE.tousLesDocumentsDisponibles());
     }
     
     @Override
