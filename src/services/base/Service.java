@@ -150,7 +150,8 @@ public abstract class Service extends HttpServlet
      * @param requete Requête HTTP.
      * @param reponse Réponse HTTP.
      */
-    protected abstract void POST(HttpServletRequest requete, HttpServletResponse reponse);
+    protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
+    { try { reponse.sendError(405); } catch (IOException e) { e.printStackTrace(); } }
 
     @Override
     protected final void doPost(HttpServletRequest requete, HttpServletResponse reponse) throws ServletException, IOException

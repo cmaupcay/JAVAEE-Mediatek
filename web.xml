@@ -14,24 +14,67 @@
     <param-value>persistance.MediathequeData</param-value>
   </context-param>
 
+  <!-- TODO a retirer -->
   <servlet>
     <servlet-name>Test</servlet-name>
     <servlet-class>services.Test</servlet-class>
   </servlet>
-
-  <servlet>
-    <servlet-name>Connexion</servlet-name>
-    <servlet-class>services.Connexion</servlet-class>
-  </servlet>
-
   <servlet-mapping>
     <servlet-name>Test</servlet-name>
     <url-pattern>/test</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>Accueil</servlet-name>
+    <servlet-class>services.Accueil</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>services.Connexion</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Document</servlet-name>
+    <servlet-class>services.Document</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Emprunts</servlet-name>
+    <servlet-class>services.Emprunts</servlet-class>
+  </servlet>
+  <!-- BIBLIOTHECAIRE -->
+  <servlet>
+    <servlet-name>BIB_Accueil</servlet-name>
+    <servlet-class>services.bibliothecaire.Accueil</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>BIB_Ajout</servlet-name>
+    <servlet-class>services.bibliothecaire.Ajout</servlet-class>
+  </servlet>
+
+  
+  <servlet-mapping>
+    <servlet-name>Accueil</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Document</servlet-name>
+    <url-pattern>/d/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Emprunts</servlet-name>
+    <url-pattern>/emprunts</url-pattern>
+  </servlet-mapping>
+  <!-- Espace Bibliothécaires (/bib/) -->
+  <servlet-mapping>
+    <servlet-name>BIB_Accueil</servlet-name>
+    <url-pattern>/bib/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BIB_Ajout</servlet-name>
+    <url-pattern>/bib/ajout</url-pattern>
   </servlet-mapping>
 
 </web-app>
