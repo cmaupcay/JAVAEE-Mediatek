@@ -4,13 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mediatek2022.Utilisateur;
-import services.base.ServiceAbonne;
+import services.base.ServiceBibliothecaire;
 
-public class Test extends ServiceAbonne
+public class Test extends ServiceBibliothecaire
 {
     public Test()
     {
-        super("test", true);
+        super("test");
     }
 
     @Override

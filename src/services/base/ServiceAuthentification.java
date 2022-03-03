@@ -1,5 +1,7 @@
 package services.base;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -63,7 +65,10 @@ public abstract class ServiceAuthentification extends Service
     @Override
     protected final void non_acceptee(HttpServletRequest requete, HttpServletResponse reponse)
     {
-        // Redirection vers la page de connexion avec demande de retour vers ce service.
-        Service.redirection(SERVICE_CONNEXION + '?' + PARAM_REDIRECTION + '=' + requete.getServletPath().substring(1), requete, reponse);
+        final Utilisateur u = (Utilisateur)requete.getSession().getAttribute(UTILISATEUR);
+        if (u == null) // Redirection vers la page de connexion avec demande de retour vers ce service.
+            Service.redirection(SERVICE_CONNEXION + '?' + PARAM_REDIRECTION + '=' + requete.getServletPath().substring(1), requete, reponse);
+        // Si l'utilisateur est déjà authentifié, on envoit le code erreur 403 (Forbidden).
+        else try { reponse.sendError(403); } catch (IOException e) { e.printStackTrace(); }
     }
 }
