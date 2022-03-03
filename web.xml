@@ -19,9 +19,19 @@
     <servlet-class>services.Test</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>services.Connexion</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>Test</servlet-name>
     <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Connexion</servlet-name>
+    <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
 
 </web-app>

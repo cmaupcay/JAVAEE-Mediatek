@@ -1,43 +1,55 @@
 package services;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Test extends Service
+import mediatek2022.Utilisateur;
+import services.base.ServiceAbonne;
+
+public class Test extends ServiceAbonne
 {
     public Test()
     {
-        super("test");
+        super("test", true);
     }
 
     @Override
-    protected boolean GET_accepter(HttpServletRequest requete, HttpServletResponse reponse)
+    protected void pre(HttpServletRequest requete, HttpServletResponse reponse)
     {
-        return true;
     }
     
     @Override
-    protected void GET_pre(HttpServletRequest requete, HttpServletResponse reponse)
+    protected void post(HttpServletRequest requete, HttpServletResponse reponse)
     {
-        requete.setAttribute("documents", MEDIATHEQUE.tousLesDocumentsDisponibles());
+
+    }
+
+    @Override
+    protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse)
+    {
     }
     
     @Override
-    protected void GET_post(HttpServletRequest requete, HttpServletResponse reponse)
+    protected void post_page(HttpServletRequest requete, HttpServletResponse reponse)
     {
 
     }
     
     @Override
-    protected void GET_PAGE_pre(HttpServletRequest requete, HttpServletResponse reponse)
+    protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse)
+    {
+        requete.setAttribute("DOCUMENTS", MEDIATHEQUE.tousLesDocumentsDisponibles());
+        requete.setAttribute("UTILISATEUR", ((Utilisateur)requete.getSession().getAttribute(UTILISATEUR)).name());
+    }
+
+    @Override
+    protected void post_contenu(HttpServletRequest requete, HttpServletResponse reponse)
     {
 
     }
 
     @Override
-    protected void GET_PAGE_post(HttpServletRequest requete, HttpServletResponse reponse)
+    protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
     {
 
     }

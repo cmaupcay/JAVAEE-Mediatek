@@ -20,16 +20,15 @@ then
 fi
 cp -r ../jsp $DESTINATION/
 
-echo "Exportation de la librairie Mediatek..."
-if [ ! -d $DESTINATION/lib ]
+if [ ! -f $DESTINATION/lib/mediatek.jar ]
 then
-    mkdir $DESTINATION/lib
+    echo "Exportation de la librairie Mediatek..."
+    if [ ! -d $DESTINATION/lib ]
+    then
+        mkdir $DESTINATION/lib
+    fi
+    cp ../lib/mediatek.jar $DESTINATION/lib/
 fi
-if [ -f $DESTINATION/lib/mediatek.jar ]
-then
-    rm $DESTINATION/lib/mediatek.jar
-fi
-cp ../lib/mediatek.jar $DESTINATION/lib/
 
 echo "Fini."
 cd $INITIAL

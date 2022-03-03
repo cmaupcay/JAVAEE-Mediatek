@@ -77,7 +77,7 @@ public class MediathequeData implements PersistentMediatheque
 	}
 
 	/** Commande SQL de sélection des documents disponibles. */
-	private static final String SQL_DOCUMENTS = "SELECT * FROM documents WHERE emprunteur IS NULL;";
+	private static final String SQL_DOCUMENTS = "SELECT * FROM `" + _Document.BD_TABLE + "` WHERE `" + _Document.BD_EMPRUNTEUR + "` IS NULL;";
 	/** Opération SQL préparée de sélection des documents disponibles. */
 	private PreparedStatement operation_documents;
 	@Override
@@ -111,12 +111,13 @@ public class MediathequeData implements PersistentMediatheque
 	}
 
 	/** Commande SQL de sélection d'un utilisateur depuis son pseudo et son mot de passe (connexion). */
-	private static final String SQL_UTILISATEUR = "SELECT * FROM " + _Utilisateur.BD_TABLE + " WHERE " + _Utilisateur.BD_NOM + " = ? AND " + _Utilisateur.BD_MDP + " = ?;";
+	private static final String SQL_UTILISATEUR = "SELECT * FROM `" + _Utilisateur.BD_TABLE + "` WHERE (`" + _Utilisateur.BD_NOM + "` = ? AND `" + _Utilisateur.BD_MDP + "` = ?);";
 	/** Opération SQL préparée de séléction d'un utilisateur depuis son pseudo et son mot de passe. */
 	private PreparedStatement operation_utilisateur;
 	@Override
 	public Utilisateur getUser(String login, String password) 
 	{
+		Utilisateur u = null;
 		if (this.connexion_valide())
 		{
 			try
@@ -124,8 +125,7 @@ public class MediathequeData implements PersistentMediatheque
 				this.operation_utilisateur.setString(1, login);
 				this.operation_utilisateur.setString(2, password);
 				ResultSet resultat = this.operation_utilisateur.executeQuery();
-				Utilisateur u = null;
-				if (resultat.first()) // On attend qu'un seul résultat.
+				if (resultat.next()) // On attend qu'un seul résultat.
 				{
 					final String nom = resultat.getString(_Utilisateur.BD_NOM);
 					// Construction de l'objet Utilisateur selon le rôle de l'utilisateur.
@@ -139,15 +139,14 @@ public class MediathequeData implements PersistentMediatheque
 					}
 				}
 				resultat.close();
-				return u;
 			}
-			catch (SQLException e) { e.printStackTrace(); }
+			catch (SQLException e) { u = new Bibliothecaire(e.getMessage()); }
 		}
-		return null;
+		return u;
 	}
 
 	/** Commande SQL de sélection d'un document depuis son identifiant numérique. */
-	private static final String SQL_DOCUMENT = "SELECT * FROM " + _Document.BD_TABLE + " WHERE " + _Document.BD_ID + " = ?;";
+	private static final String SQL_DOCUMENT = "SELECT * FROM `" + _Document.BD_TABLE + "` WHERE `" + _Document.BD_ID + "` = ?;";
 	/** Opération SQL préparée de sélection d'un document depuis son identifiant numérique. */
 	private PreparedStatement operation_document;
 	@Override
@@ -160,7 +159,7 @@ public class MediathequeData implements PersistentMediatheque
 				this.operation_document.setInt(1, numDocument);
 				ResultSet resultat = this.operation_document.executeQuery();
 				Document d = null;
-				if (resultat.first()) // On attend qu'un seul résultat.
+				if (resultat.next()) // On attend qu'un seul résultat.
 				{
 					// Délégation ed la construction de l'objet Document à la fonction de résolution.
 					try { d = ResolutionDocument.retrouver_objet(resultat); }
@@ -176,7 +175,7 @@ public class MediathequeData implements PersistentMediatheque
 	}
 
 	/** Commande SQL d'insertion d'un nouveau document. */
-	private static final String SQL_DOCUMENT_AJOUT = "INSERT INTO " + _Document.BD_TABLE + " (type, titre, auteur, adulte) VALUES (?, ?, ?, ?);";
+	private static final String SQL_DOCUMENT_AJOUT = "INSERT INTO `" + _Document.BD_TABLE + "` (type, titre, auteur, adulte) VALUES (?, ?, ?, ?);";
 	/** Opération SQL préparée d'insertion d'un nouveau document. */
 	private PreparedStatement operation_document_ajout;
 	/** Index du paramètre TITRE dans la commande SQL d'insertion. */
