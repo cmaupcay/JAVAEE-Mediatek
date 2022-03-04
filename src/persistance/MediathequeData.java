@@ -214,9 +214,7 @@ public class MediathequeData implements PersistentMediatheque
 			try
 			{
 				// Modification de l'emprunteur.
-				String emprunteur = doc.emprunteur();
-				if (emprunteur == null) emprunteur = "NULL";
-				this.operation_document_maj.setString(SQL_DOCUMENT_MAJ_EMPRUNTEUR, emprunteur);
+				this.operation_document_maj.setString(SQL_DOCUMENT_MAJ_EMPRUNTEUR, doc.emprunteur());
 				// Modification de l'identifiant.
 				this.operation_document_maj.setInt(SQL_DOCUMENT_MAJ_ID, doc.id());
 				
