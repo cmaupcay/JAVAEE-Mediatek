@@ -23,7 +23,7 @@ public abstract class ServiceAuthentification extends Service
     }
 
     /** Nom de l'attribut associé à l'utilisateur dans la session. */
-    public static final String UTILISATEUR = "u";
+    public static final String PARAM_UTILISATEUR = "u";
 
     /**
      * Conditions d'acceptation d'un utilisateur.
@@ -31,13 +31,6 @@ public abstract class ServiceAuthentification extends Service
      * @return Indique si l'utilisateur doit être accepté.
      */
     protected abstract boolean accepter_utilisateur(final Utilisateur u);
-    /** Utilisateur authentfié. */
-    private Utilisateur utilisateur;
-    /**
-     * Retourne l'utilisateur authentifié.
-     * @return Utilisateur authentifié.
-     */
-    protected final Utilisateur utilisateur() { return this.utilisateur; }
 
     @Override
     protected final boolean accepter(HttpServletRequest requete, HttpServletResponse reponse)
@@ -47,12 +40,8 @@ public abstract class ServiceAuthentification extends Service
             final HttpSession session = requete.getSession();
             if (session != null)
             {
-                final Utilisateur u = (Utilisateur)session.getAttribute(UTILISATEUR);
-                if (this.accepter_utilisateur(u))
-                {
-                    this.utilisateur = u;
-                    return true;
-                }
+                final Utilisateur u = (Utilisateur)session.getAttribute(PARAM_UTILISATEUR);
+                if (this.accepter_utilisateur(u)) return true;
             }
         }
         catch (Exception e) { e.printStackTrace(); } // Toute erreur invalide l'authentification.
@@ -65,9 +54,9 @@ public abstract class ServiceAuthentification extends Service
     @Override
     protected final void non_acceptee(HttpServletRequest requete, HttpServletResponse reponse)
     {
-        final Utilisateur u = (Utilisateur)requete.getSession().getAttribute(UTILISATEUR);
+        final Utilisateur u = (Utilisateur)requete.getSession().getAttribute(PARAM_UTILISATEUR);
         if (u == null) // Redirection vers la page de connexion avec demande de retour vers ce service.
-            Service.redirection(SERVICE_CONNEXION + '?' + PARAM_REDIRECTION + '=' + requete.getServletPath().substring(1), requete, reponse);
+            Service.redirection(SERVICE_CONNEXION, true, requete, reponse);
         // Si l'utilisateur est déjà authentifié, on envoit le code erreur 403 (Forbidden).
         else try { reponse.sendError(403); } catch (IOException e) { e.printStackTrace(); }
     }

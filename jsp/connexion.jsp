@@ -6,6 +6,6 @@
     <input type="submit" value="Se connecter">
 </form>
 
-<p>
-    ${ msg }
-</p>
+<c:if test="${ msg != null }">
+    <p>${ msg }</p>
+</c:if>

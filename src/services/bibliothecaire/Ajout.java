@@ -5,8 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.base.ServiceBibliothecaire;
 
+/**
+ * Service d'ajout d'un document.
+ */
 public class Ajout extends ServiceBibliothecaire
 {
+    /**
+     * Construction du service.
+     */
     public Ajout()
     {
         super("bibliothecaire/ajout");
@@ -16,18 +22,20 @@ public class Ajout extends ServiceBibliothecaire
     protected void pre(HttpServletRequest requete, HttpServletResponse reponse) 
     {
     }
-    @Override
-    protected void post(HttpServletRequest requete, HttpServletResponse reponse) {}
 
     @Override
-    protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse) {}
-    @Override
-    protected void post_page(HttpServletRequest requete, HttpServletResponse reponse) {}
-    
+    protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse)
+    {
+    }
+
     @Override
     protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse)
     {
     }
+
     @Override
-    protected void post_contenu(HttpServletRequest requete, HttpServletResponse reponse) {}
+    protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
+    {
+        // TODO Ajout d'un document
+    }
 }

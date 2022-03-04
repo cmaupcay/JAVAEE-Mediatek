@@ -20,7 +20,7 @@ echo "Démarrage de MySQL via XAMPP..."
 sudo /opt/lampp/xampp start
 
 echo "Ouverture de la Mediatek sur le navigateur..."
-python -mwebbrowser http://localhost:8080/mediatek/test
+python -mwebbrowser http://localhost:8080/mediatek/
 
 echo "Fini."
 cd $INITIAL

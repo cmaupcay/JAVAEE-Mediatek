@@ -14,16 +14,6 @@
     <param-value>persistance.MediathequeData</param-value>
   </context-param>
 
-  <!-- TODO a retirer -->
-  <servlet>
-    <servlet-name>Test</servlet-name>
-    <servlet-class>services.Test</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Test</servlet-name>
-    <url-pattern>/test</url-pattern>
-  </servlet-mapping>
-
   <servlet>
     <servlet-name>Accueil</servlet-name>
     <servlet-class>services.Accueil</servlet-class>
@@ -33,8 +23,12 @@
     <servlet-class>services.Connexion</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>Document</servlet-name>
-    <servlet-class>services.Document</servlet-class>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>services.Deconnexion</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PageDocument</servlet-name>
+    <servlet-class>services.PageDocument</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Emprunts</servlet-name>
@@ -60,8 +54,12 @@
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Document</servlet-name>
-    <url-pattern>/d/</url-pattern>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PageDocument</servlet-name>
+    <url-pattern>/doc</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Emprunts</servlet-name>

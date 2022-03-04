@@ -26,11 +26,28 @@ public abstract class Service extends HttpServlet
     protected static final String PARAM_MSG = "msg";
     /** Paramètre de demande de redirection. */
     protected static final String PARAM_REDIRECTION = "redirect";
-    protected static void redirection(final String service, HttpServletRequest requete, HttpServletResponse reponse)
+    protected static void redirection(final String service, final boolean demander_retour, HttpServletRequest requete, HttpServletResponse reponse)
     {
-        try { reponse.sendRedirect(requete.getContextPath() + '/' + service); }
+        String fin = "";
+        if (demander_retour)
+        {
+            fin = '?' + PARAM_REDIRECTION + '=' + requete.getServletPath().substring(1);
+            final String query = requete.getQueryString();
+            if (query != null) fin += '?' + query;
+        }
+        try { reponse.sendRedirect(requete.getContextPath() + '/' + service + fin); }
         catch (IOException e) { e.printStackTrace(); }
     }
+
+    /** Paramètre indiquant aux JSP la racine de la plateforme web (utile pour les liens). */
+    private static final String PARAM_RACINE = "RACINE";
+    /** Paramètre indiquant aux JSP la page web actuelle (utile pour les liens). */
+    private static final String PARAM_PAGE = "PAGE";
+
+    /** Paramètre standard de transfert d'un document entre les objets (servlet, JSP, session). */
+    protected static final String PARAM_DOCUMENT = "doc";
+    /** Paramètre standard de transfert de documents entre les objets (servlet, JSP, session). */
+    protected static final String PARAM_DOCUMENTS = "docs";
 
     /** Nom du fichier JSP associé au service. */
     private final String jsp;
@@ -70,19 +87,6 @@ public abstract class Service extends HttpServlet
     }
 
     /**
-     * Fonction de pré-chargement du service, avant l'acceptation.
-     * @param requete Requête HTTP.
-     * @param reponse Réponse HTTP.
-     */
-    protected abstract void pre(HttpServletRequest requete, HttpServletResponse reponse);
-    /**
-     * Fonction de post-chargement du service.
-     * @param requete Requête HTTP.
-     * @param reponse Réponse HTTP.
-     */
-    protected abstract void post(HttpServletRequest requete, HttpServletResponse reponse);
-
-    /**
      * Fonction d'acceptation des requêtes HTTP par le service.
      * @param requete Requête HTTP.
      * @param reponse Réponse HTTP.
@@ -97,48 +101,41 @@ public abstract class Service extends HttpServlet
     protected abstract void non_acceptee(HttpServletRequest requete, HttpServletResponse reponse);
 
     /**
+     * Fonction de pré-chargement du service, avant l'acceptation.
+     * @param requete Requête HTTP.
+     * @param reponse Réponse HTTP.
+     */
+    protected abstract void pre(HttpServletRequest requete, HttpServletResponse reponse);
+    /**
      * Fonction de pré-chargement de la page.
      * @param requete Requête HTTP.
      * @param reponse Réponse HTTP.
      */
     protected abstract void pre_page(HttpServletRequest requete, HttpServletResponse reponse);
     /**
-     * Fonction de post-chargement de la page.
-     * @param requete Requête HTTP.
-     * @param reponse Réponse HTTP.
-     */
-    protected abstract void post_page(HttpServletRequest requete, HttpServletResponse reponse);
-    
-    /**
      * Fonction de pré-chargement du contenu de la page (après le chargement de l'entête).
      * @param requete Requête HTTP.
      * @param reponse Réponse HTTP.
      */
     protected abstract void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse);
-    /**
-     * Fonction de post-chargement du contenu de la page (après le chargement du fichier JSP associé au service).
-     * @param requete Requête HTTP.
-     * @param reponse Réponse HTTP.
-     */
-    protected abstract void post_contenu(HttpServletRequest requete, HttpServletResponse reponse);
 
     private final void proceder(HttpServletRequest requete, HttpServletResponse reponse, final boolean post) throws ServletException, IOException
     {
-        requete.getSession(true); // On créer la session si elle n'existe pas.
+        requete.getSession(true); // On créer la session si elle n'existe pas.        
         this.pre(requete, reponse);
         if (post) this.POST(requete, reponse); // La méthode POST est exécutée avant l'acceptation de la requête.
         if (this.accepter(requete, reponse))
         {
+            requete.setAttribute(PARAM_RACINE, requete.getContextPath()); // Définition de la racine de la plateforme web pour les JSP.
+            requete.setAttribute(PARAM_PAGE, requete.getServletPath().substring(1)); // Définition de la page web actuelle pour les JSP.
+
             this.pre_page(requete, reponse);
             this.getServletContext().getRequestDispatcher(JSP_DOSSIER + JSP_ENTETE + ".jsp").include(requete, reponse);
             this.pre_contenu(requete, reponse);
             this.getServletContext().getRequestDispatcher(JSP_DOSSIER + this.jsp + ".jsp").include(requete, reponse);
-            this.post_contenu(requete, reponse);
             this.getServletContext().getRequestDispatcher(JSP_DOSSIER + JSP_PIED + ".jsp").include(requete, reponse);
-            this.post_page(requete, reponse);
         }
         else this.non_acceptee(requete, reponse);
-        this.post(requete, reponse);
     }
 
     @Override

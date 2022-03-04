@@ -36,7 +36,7 @@ public abstract class _Document implements Document
     /** Pseudo de l'emprunteur actuel du document, null si le document est disponible. */
     private String emprunteur;
     @Override
-    public final boolean disponible() { return (this.emprunteur != null); }
+    public final boolean disponible() { return (this.emprunteur == null); }
 
     /**
      * Construction d'un document.

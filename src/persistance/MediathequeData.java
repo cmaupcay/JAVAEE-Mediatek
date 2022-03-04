@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mediatek2022.*;
-import persistance.documents.Erreur;
 import persistance.documents.ResolutionDocument;
 import persistance.documents._Document;
 import persistance.utilisateurs.Abonne;
@@ -92,19 +91,11 @@ public class MediathequeData implements PersistentMediatheque
 				while (resultat.next())
 				{
 					try { documents.add(ResolutionDocument.retrouver_objet(resultat)); }
-					catch (Exception e) 
-					{
-						documents.add(new Erreur(e)); // DEBUG
-						e.printStackTrace();
-					}
+					catch (Exception e) { e.printStackTrace(); }
 				}
 				resultat.close();
 			}
-			catch (SQLException e) 
-			{
-				documents.add(new Erreur(e)); // DEBUG
-				e.printStackTrace();
-			}
+			catch (SQLException e) { e.printStackTrace(); }
 			return documents;
 		}
 		return null;
@@ -140,7 +131,7 @@ public class MediathequeData implements PersistentMediatheque
 				}
 				resultat.close();
 			}
-			catch (SQLException e) { u = new Bibliothecaire(e.getMessage()); }
+			catch (SQLException e) { e.printStackTrace(); }
 		}
 		return u;
 	}

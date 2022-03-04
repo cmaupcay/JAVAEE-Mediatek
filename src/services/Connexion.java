@@ -8,8 +8,14 @@ import mediatek2022.Utilisateur;
 import services.base.Service;
 import services.base.ServiceAuthentification;
 
+/**
+ * Service de connexion.
+ */
 public class Connexion extends Service
 {
+    /**
+     * Construction du service.
+     */
     public Connexion()
     {
         super("connexion");
@@ -18,41 +24,34 @@ public class Connexion extends Service
     @Override
     protected void pre(HttpServletRequest requete, HttpServletResponse reponse) 
     {
-        // Si une redirection est demandée, on l'enregistre en session.
+        // Si une redirection est demandée, on l'enregistre en attribut.
         final String redirection = requete.getParameter(PARAM_REDIRECTION);
-        if (redirection != null) 
-        {
-            final HttpSession session = requete.getSession();
-            session.setAttribute(PARAM_REDIRECTION, redirection);
-        }
+        if (redirection != null) requete.setAttribute(PARAM_REDIRECTION, redirection);
     }
-    @Override
-    protected void post(HttpServletRequest requete, HttpServletResponse reponse) {}
 
     @Override
     protected boolean accepter(HttpServletRequest requete, HttpServletResponse reponse) 
     {
         final HttpSession session = requete.getSession();
-        final Utilisateur u = (Utilisateur)session.getAttribute(ServiceAuthentification.UTILISATEUR);
+        final Utilisateur u = (Utilisateur)session.getAttribute(ServiceAuthentification.PARAM_UTILISATEUR);
         return u == null; // Si l'utilisateur est connecté, on ne l'accepte pas.
     }
     @Override
     protected void non_acceptee(HttpServletRequest requete, HttpServletResponse reponse) 
     {
-        final HttpSession session = requete.getSession();
-        String redirection = (String)session.getAttribute(PARAM_REDIRECTION);
+        String redirection = (String)requete.getAttribute(PARAM_REDIRECTION);
         if (redirection == null) redirection = "";          // Si aucune redirection définie, on redirige vers l'accueil.
-        else session.removeAttribute(PARAM_REDIRECTION);    // Sinon, on supprime de la session la redirection définie.
-        Service.redirection(redirection, requete, reponse);
+        Service.redirection(redirection, false, requete, reponse);
     }
 
     @Override
     protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse) {}
-    @Override
-    protected void post_page(HttpServletRequest requete, HttpServletResponse reponse) {}
     
+    /** Nom et identifiant du champs associé au nom dans le formulaire. */
     private static final String PARAM_POST_NOM = "nom";
+    /** Nom et identifiant du champs associé au mot de passe dans le formulaire. */
     private static final String PARAM_POST_MDP = "mdp";
+    
     @Override
     protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse)
     {
@@ -60,8 +59,6 @@ public class Connexion extends Service
         requete.setAttribute("PARAM_POST_NOM", PARAM_POST_NOM);
         requete.setAttribute("PARAM_POST_MDP", PARAM_POST_MDP);
     }
-    @Override
-    protected void post_contenu(HttpServletRequest requete, HttpServletResponse reponse) {}
 
     @Override
     protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
@@ -78,7 +75,7 @@ public class Connexion extends Service
             {
                 // Enregistrement de l'utilisateur en sesssion.
                 final HttpSession session = requete.getSession();
-                session.setAttribute(ServiceAuthentification.UTILISATEUR, u);
+                session.setAttribute(ServiceAuthentification.PARAM_UTILISATEUR, u);
             }
             else message = "Identifiants incorrects";
         }
