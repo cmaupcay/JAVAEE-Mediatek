@@ -6,15 +6,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Mediatek</title>
+    
+    <style>
+        /* Inclusion manuelle du CSS car inclusion par HTTP impossible. */
+        <%@include file="../style/style.css"%>
+    </style>
+
 </head>
 <body>
     <header>
-        <nav>
+        <div>
             <h1>Mediatek</h1>
             <c:if test="${ u != null }">
-                <h4>Connecté en tant que <i><c:out value="${ u.name() }"/></i></h4>
+                <h6>Connecté en tant que <i><c:out value="${ u.name() }"/></i></h6>
             </c:if>
+        </div>
+        <nav>
             <ul>
                 <li>
                     <a href="${ RACINE }/">Accueil</a>
@@ -46,3 +55,5 @@
             </ul>
         </nav>
     </header>
+
+    <section>

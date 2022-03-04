@@ -207,6 +207,10 @@ public class MediathequeData implements PersistentMediatheque
 	public static final int SQL_DOCUMENT_MAJ_EMPRUNTEUR = 1;
 	/** Index du paramètre ID dans la commande SQL de mise à jour. */
 	public static final int SQL_DOCUMENT_MAJ_ID = 2;
+	/**
+	 * Mise à jour de l'état d'un document dans la base de données.
+	 * @param doc Document cible.
+	 */
 	public void majDocument(_Document doc)
 	{
 		if (this.connexion_valide())

@@ -1,7 +1,8 @@
-
+    </section>
+    
     <footer>
-        <h4>Mediatek - 2022</h4>
-        <h5>Clément PROST & Clément MAUPERON</h5>
+        <h3><span>Mediatek</span> - 2022</h3>
+        <i>Clément PROST & Clément MAUPERON</i>
     </footer>
 
 </body>

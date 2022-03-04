@@ -1,0 +1,152 @@
+:root
+{
+    --col-0: #e8eddf;
+    --col-1: #cfdbd5;
+    --col-2: #f5cb5c;
+    --col-3: #333533;
+    --col-4: #242423;
+}
+*
+{
+    user-select: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    color: var(--col-0);
+}
+a:hover, h1, h2, h3, h4
+{
+    color: var(--col-2);
+}
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    text-align: center;
+}
+
+header
+{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 4rem;
+    background-color: var(--col-3);
+}
+header div
+{
+    width: 50%;
+}
+header div h1
+{
+    text-transform: uppercase;
+    font-size: 3.2rem;
+    letter-spacing: 1.4rem;
+    cursor: pointer;
+}
+header div h1:hover
+{
+    font-size: 3.4rem;
+}
+header nav
+{
+    width: 60%;
+    background-color: none;
+}
+header nav ul
+{
+    display: inline-flex;
+    align-items: center;
+    list-style: none;
+}
+header nav ul li
+{
+    font-size: 1rem;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+header nav ul li:hover
+{
+    font-size: 1.2rem;
+}
+
+section
+{
+    height: 64vh;
+    background-color: var(--col-4);
+    padding: 2rem 4rem;
+}
+section form
+{
+    display: grid;
+    padding: 1rem 6rem;
+    font-size: 1.2rem;
+}
+section form input
+{
+    text-align: center;
+    color: var(--col-4);
+    margin: 1rem 0 2.4rem;
+    border-radius: 0.4rem;
+    border: none;
+}
+section form input[type=text], section form input[type=password]
+{
+    background-color: var(--col-1);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+}
+section form input[type=submit]
+{
+    padding: 0.7rem 0;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    background-color: var(--col-2);
+    color: var(--col-3);
+    cursor: pointer;
+}
+section form input[type=submit]:hover
+{
+    transform: scale(1.05);
+}
+section form label
+{
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    color: var(--col-1);
+}
+section div#infos
+{
+    margin: 2rem 0;
+}
+section div#infos h4
+{
+    font-size: 1.4rem;
+}
+
+footer
+{
+    height: 10vh;
+    padding: 2rem 4rem;
+    background-color: var(--col-3);
+}
+footer h3
+{
+    padding-bottom: 0.5rem;
+}
+footer h3 span
+{
+    color: var(--col-2);
+    letter-spacing: 0.4rem;
+    text-transform: uppercase
+}
+footer i
+{
+    font-size: 0.9rem;
+}
