@@ -7,5 +7,5 @@
 </form>
 
 <c:if test="${ msg != null }">
-    <p>${ msg }</p>
+    <c:out value="${ msg }"/>
 </c:if>

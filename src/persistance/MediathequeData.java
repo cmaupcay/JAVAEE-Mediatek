@@ -1,5 +1,8 @@
 package persistance;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,10 +24,13 @@ import persistance.utilisateurs._Utilisateur;
  */
 public class MediathequeData implements PersistentMediatheque
 {
+	private static MediathequeData INSTANCE = new MediathequeData();
+	public static final MediathequeData getInstance() { return INSTANCE; }
+
 	static 
 	{
 		// Déclaration à la médiathèque (instance unique de persistance des données).
-		Mediatheque.getInstance().setData(new MediathequeData());
+		Mediatheque.getInstance().setData(INSTANCE);
 	}
 
 	/** Classe du driver JDBC à utiliser. */
@@ -71,6 +77,7 @@ public class MediathequeData implements PersistentMediatheque
 			this.operation_utilisateur = this.connexion.prepareStatement(SQL_UTILISATEUR);
 			this.operation_document = this.connexion.prepareStatement(SQL_DOCUMENT);
 			this.operation_document_ajout = this.connexion.prepareStatement(SQL_DOCUMENT_AJOUT);
+			this.operation_document_maj = this.connexion.prepareStatement(SQL_DOCUMENT_MAJ);
 		}
 		catch (SQLException e) { e.printStackTrace(); }
 	}
@@ -187,6 +194,33 @@ public class MediathequeData implements PersistentMediatheque
 				// Délégation à la fonction de préparation de l'ajout.
 				if (ResolutionDocument.preparer_ajout(this.operation_document_ajout, type, args))
 					this.operation_document_ajout.execute();
+			}
+			catch (SQLException e) { e.printStackTrace(); }
+		}
+	}
+	
+	/** Commande SQL de mise à jour d'un document. */
+	private static final String SQL_DOCUMENT_MAJ = "UPDATE `" + _Document.BD_TABLE + "` SET `emprunteur` = ? WHERE `id` = ?;";
+	/** Opération SQL préparée de mise à jour d'un document. */
+	private PreparedStatement operation_document_maj;
+	/** Index du paramètre EMPRUNTEUR dans la commande SQL de mise à jour. */
+	public static final int SQL_DOCUMENT_MAJ_EMPRUNTEUR = 1;
+	/** Index du paramètre ID dans la commande SQL de mise à jour. */
+	public static final int SQL_DOCUMENT_MAJ_ID = 2;
+	public void majDocument(_Document doc)
+	{
+		if (this.connexion_valide())
+		{
+			try
+			{
+				// Modification de l'emprunteur.
+				String emprunteur = doc.emprunteur();
+				if (emprunteur == null) emprunteur = "NULL";
+				this.operation_document_maj.setString(SQL_DOCUMENT_MAJ_EMPRUNTEUR, emprunteur);
+				// Modification de l'identifiant.
+				this.operation_document_maj.setInt(SQL_DOCUMENT_MAJ_ID, doc.id());
+				
+				this.operation_document_maj.execute();
 			}
 			catch (SQLException e) { e.printStackTrace(); }
 		}

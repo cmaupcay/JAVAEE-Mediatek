@@ -2,6 +2,7 @@ package persistance.documents;
 
 import mediatek2022.Document;
 import mediatek2022.Utilisateur;
+import persistance.MediathequeData;
 
 /**
  * Classe de base des documents implémentés.
@@ -35,6 +36,11 @@ public abstract class _Document implements Document
 
     /** Pseudo de l'emprunteur actuel du document, null si le document est disponible. */
     private String emprunteur;
+    /**
+     * Retourne le pseudo de l'emprunteur actuel du document.
+     * @return Emprunteur actuel, null si le document est disponible.
+     */
+    public final String emprunteur() { return this.emprunteur; }
     @Override
     public final boolean disponible() { return (this.emprunteur == null); }
 
@@ -54,10 +60,23 @@ public abstract class _Document implements Document
     @Override
     public final void emprunt(Utilisateur u) throws Exception
     {
-        if (this.disponible()) this.emprunteur = u.name();
+        if (this.disponible())
+        {
+            this.emprunteur = u.name();
+            // Mise à jour de l'état du document
+            MediathequeData.getInstance().majDocument(this);
+        }
         else throw new Exception("Le document n'est pas disponible à l'emprunt.");
     }
 
     @Override
-    public final void retour() { this.emprunteur = null; }
+    public final void retour() 
+    {
+        if (!this.disponible())
+        {
+            this.emprunteur = null;
+            // Mise à jour de l'état du document
+            MediathequeData.getInstance().majDocument(this);
+        }
+    }
 }
