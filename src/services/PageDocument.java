@@ -54,7 +54,4 @@ public class PageDocument extends ServiceAbonne
         }
         else Service.redirection("", false, requete, reponse);
     }
-    
-    @Override
-    protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse) {}
 }

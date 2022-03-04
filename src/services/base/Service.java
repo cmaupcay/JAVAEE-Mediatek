@@ -17,10 +17,6 @@ public abstract class Service extends HttpServlet
 {
     /** Chemin du dossier des fichiers JSP. */
     private static final String JSP_DOSSIER = "/WEB-INF/jsp/";
-    /** Fichier JSP d'entête, inclus avant chaque page JSP. */
-    protected static final String JSP_ENTETE = "modules/entete";
-    /** Fichier JSP de pied de page, inclus après chaque page JSP. */
-    protected static final String JSP_PIED = "modules/pied";
 
     /** Paramètre d'envoie de message, surtout pour du servlet vers le JSP via les attributs de la requête. */
     protected static final String PARAM_MSG = "msg";
@@ -112,12 +108,6 @@ public abstract class Service extends HttpServlet
      * @param reponse Réponse HTTP.
      */
     protected abstract void pre_page(HttpServletRequest requete, HttpServletResponse reponse);
-    /**
-     * Fonction de pré-chargement du contenu de la page (après le chargement de l'entête).
-     * @param requete Requête HTTP.
-     * @param reponse Réponse HTTP.
-     */
-    protected abstract void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse);
 
     private final void proceder(HttpServletRequest requete, HttpServletResponse reponse, final boolean post) throws ServletException, IOException
     {
@@ -130,10 +120,7 @@ public abstract class Service extends HttpServlet
             requete.setAttribute(PARAM_PAGE, requete.getServletPath().substring(1)); // Définition de la page web actuelle pour les JSP.
 
             this.pre_page(requete, reponse);
-            this.getServletContext().getRequestDispatcher(JSP_DOSSIER + JSP_ENTETE + ".jsp").include(requete, reponse);
-            this.pre_contenu(requete, reponse);
             this.getServletContext().getRequestDispatcher(JSP_DOSSIER + this.jsp + ".jsp").include(requete, reponse);
-            this.getServletContext().getRequestDispatcher(JSP_DOSSIER + JSP_PIED + ".jsp").include(requete, reponse);
         }
         else this.non_acceptee(requete, reponse);
     }

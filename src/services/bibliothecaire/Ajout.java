@@ -29,11 +29,6 @@ public class Ajout extends ServiceBibliothecaire
     }
 
     @Override
-    protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse)
-    {
-    }
-
-    @Override
     protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
     {
         // TODO Ajout d'un document

@@ -29,9 +29,4 @@ public class Accueil extends ServiceBibliothecaire
         // Récupération des documents disponibles.
         requete.setAttribute(PARAM_DOCUMENTS, MEDIATHEQUE.tousLesDocumentsDisponibles());
     }
-    
-    @Override
-    protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse)
-    {
-    }
 }

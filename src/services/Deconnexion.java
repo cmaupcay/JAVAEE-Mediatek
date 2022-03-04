@@ -36,7 +36,4 @@ public class Deconnexion extends ServiceAbonne
         // Redirection vers la page demandée.
         Service.redirection((String)requete.getAttribute(PARAM_REDIRECTION), false, requete, reponse);
     }
-    
-    @Override
-    protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse) {}
 }

@@ -14,6 +14,15 @@
     <param-value>persistance.MediathequeData</param-value>
   </context-param>
 
+  <jsp-config>
+      <jsp-property-group>
+        <url-pattern>*.jsp</url-pattern>
+        <el-ignored>false</el-ignored>
+        <include-prelude>/WEB-INF/jsp/modules/entete.jsp</include-prelude>
+        <include-coda>/WEB-INF/jsp/modules/pied.jsp</include-coda>
+    </jsp-property-group>
+  </jsp-config>
+
   <servlet>
     <servlet-name>Accueil</servlet-name>
     <servlet-class>services.Accueil</servlet-class>

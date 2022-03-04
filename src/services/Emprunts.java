@@ -26,9 +26,4 @@ public class Emprunts extends ServiceAbonne
     {
         // TODO Trouver comment récupérer les documents empruntés par l'utilisateur.
     }
-    
-    @Override
-    protected void pre_contenu(HttpServletRequest requete, HttpServletResponse reponse)
-    {
-    }
 }

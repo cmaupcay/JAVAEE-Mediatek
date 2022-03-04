@@ -41,7 +41,12 @@ public abstract class ServiceAuthentification extends Service
             if (session != null)
             {
                 final Utilisateur u = (Utilisateur)session.getAttribute(PARAM_UTILISATEUR);
-                if (this.accepter_utilisateur(u)) return true;
+                if (this.accepter_utilisateur(u))
+                {
+                    // Ajout d'une référence à l"utilisateur courant dans la requete.
+                    requete.setAttribute(PARAM_UTILISATEUR, u);
+                    return true;
+                }
             }
         }
         catch (Exception e) { e.printStackTrace(); } // Toute erreur invalide l'authentification.
