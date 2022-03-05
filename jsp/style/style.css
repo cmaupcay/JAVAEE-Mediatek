@@ -135,6 +135,17 @@ section div#infos h4
 {
     font-size: 1.4rem;
 }
+section div#doc h2
+{
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+section div#doc h3
+{
+    color: var(--col-0);
+}
 
 footer
 {

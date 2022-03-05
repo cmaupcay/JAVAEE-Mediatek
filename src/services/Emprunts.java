@@ -1,8 +1,11 @@
 package services;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mediatek2022.Utilisateur;
 import services.base.ServiceAbonne;
 
 /**
@@ -24,6 +27,8 @@ public class Emprunts extends ServiceAbonne
     @Override
     protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse) 
     {
-        // TODO Trouver comment récupérer les documents empruntés par l'utilisateur.
+        // Récupération de la liste des documents empruntés par l'utilisateur courant.
+        final List<String[]> documents = APIDoc.metas(APIDoc.emprunts((Utilisateur)requete.getAttribute(PARAM_UTILISATEUR)));
+        requete.setAttribute(PARAM_DOCUMENTS, documents);
     }
 }

@@ -72,6 +72,6 @@ public class DVD extends _Document
     }
 
     @Override
-    public final String toString() 
-    { return "<i>" + this.titre + "</i> de " + this.realisateur + (this.adulte ? " <b>(+18)</b>" : ""); }
+    public final String _toString() 
+    { return this.titre + INFO_SEP + this.realisateur + INFO_SEP + this.adulte; }
 }

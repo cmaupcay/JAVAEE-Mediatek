@@ -64,8 +64,8 @@ public class PageDocument extends ServiceAbonne
     {
         // Récupération dans la médiathèque depuis l'identifiant.
         final Document doc = this.recuperer_document(requete, reponse);
-        if (doc != null) // Enregistrement en tant qu'attribut de requête.
-            requete.setAttribute(PARAM_DOCUMENT, doc);
+        if (doc != null) // Enregistrement des métadonnées en tant qu'attribut de requête.
+            requete.setAttribute(PARAM_DOCUMENT, APIDoc.meta(doc));
         else
         {
             try { reponse.sendError(404, "Document introuvable."); }

@@ -4,7 +4,7 @@
     <ul>
         <c:forEach var="doc" items="${ docs }">
             <li>
-                ${ doc }
+                <a href="${ RACINE }/doc?id=${ doc[ID] }"><c:out value="${ doc[TITRE] }"/></a>
             </li>
         </c:forEach>
     </ul>

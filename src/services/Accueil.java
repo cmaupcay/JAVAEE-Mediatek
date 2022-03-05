@@ -1,11 +1,11 @@
 package services;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mediatek2022.Document;
 import services.base.Service;
 
 /**
@@ -33,7 +33,7 @@ public class Accueil extends Service
     protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse) 
     {
         // Récupération de la liste des documents diponibles.
-        final List<Document> documents = MEDIATHEQUE.tousLesDocumentsDisponibles();
+        final List<String[]> documents = APIDoc.metas(MEDIATHEQUE.tousLesDocumentsDisponibles());
         requete.setAttribute(PARAM_DOCUMENTS, documents);
     }
 }

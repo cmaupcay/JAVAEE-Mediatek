@@ -79,4 +79,15 @@ public abstract class _Document implements Document
             MediathequeData.getInstance().majDocument(this);
         }
     }
+
+    /** Séparateur des informations dans le toString. */
+    protected static final String INFO_SEP = "//";
+    /**
+     * Retourne les informations sérialisées du document.
+     * @return Informations du documents.
+     */
+    protected abstract String _toString();
+
+    @Override
+    public final String toString() { return this.id + INFO_SEP + this.type + INFO_SEP + this.emprunteur + INFO_SEP + this._toString(); }
 }
