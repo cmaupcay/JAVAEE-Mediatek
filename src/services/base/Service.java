@@ -111,7 +111,7 @@ public abstract class Service extends HttpServlet
 
     private final void proceder(HttpServletRequest requete, HttpServletResponse reponse, final boolean post) throws ServletException, IOException
     {
-        requete.getSession(true); // On créer la session si elle n'existe pas.        
+        requete.getSession(true); // On créer la session si elle n'existe pas.     
         this.pre(requete, reponse);
         if (post) this.POST(requete, reponse); // La méthode POST est exécutée avant l'acceptation de la requête.
         if (this.accepter(requete, reponse))

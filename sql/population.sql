@@ -11,7 +11,7 @@ INSERT INTO mediatek.utilisateurs (nom, mdp, bibliothecaire, age, abonnement_act
 /* DVD */
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "Star Wars - Le retour du Jedi", "Georges Lucas", 0);
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "OSS 117 - Le Caire, nid d'espions", "Michel Hazanivicius", 0);
-INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "La Bibliothécaire", "Jacquie & Michel", 1);
+INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "La Bibliothecaire", "Jacquie & Michel", 1);
 /* Blue-Ray */
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (1, "Star Wars - Le retour du Jedi", "Georges Lucas", 0);
 

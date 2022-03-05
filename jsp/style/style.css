@@ -88,7 +88,7 @@ section form
     padding: 1rem 6rem;
     font-size: 1.2rem;
 }
-section form input
+section form input, section button, section form select
 {
     text-align: center;
     color: var(--col-4);
@@ -96,13 +96,15 @@ section form input
     border-radius: 0.4rem;
     border: none;
 }
-section form input[type=text], section form input[type=password]
+section form input[type=text], 
+section form input[type=password], 
+section form select
 {
     background-color: var(--col-1);
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
 }
-section form input[type=submit]
+section form input[type=submit], section button
 {
     padding: 0.7rem 0;
     font-size: 1.2rem;
@@ -111,9 +113,13 @@ section form input[type=submit]
     color: var(--col-3);
     cursor: pointer;
 }
-section form input[type=submit]:hover
+section form input[type=submit]:hover, section button:hover
 {
     transform: scale(1.05);
+}
+section form#ajout input[type=submit]
+{
+    margin-bottom: 1rem;
 }
 section form label
 {
@@ -123,7 +129,7 @@ section form label
 }
 section div#infos
 {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 section div#infos h4
 {

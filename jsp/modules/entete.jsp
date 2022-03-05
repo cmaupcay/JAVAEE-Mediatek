@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html;encoding=UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,7 +21,7 @@
         <div>
             <h1>Mediatek</h1>
             <c:if test="${ u != null }">
-                <h6>Connecté en tant que <i><c:out value="${ u.name() }"/></i></h6>
+                <h5>Connecté en tant que <i><c:out value="${ u.name() }"/></i></h5>
             </c:if>
         </div>
         <nav>

@@ -1,7 +1,10 @@
 // TODO Liste des documents et disponibilités. 
 // TODO SI LE TEMPS Liste des utilisateurs et documents à rendre.
 
-<h3>Documents disponibles : </h3>
-<p>${ docs }</p>
+<%@include file="../modules/docs.jsp" %>
 
-<a href="ajout">Ajouter un document</a>
+<div id="infos">
+    <form method="post">
+        <input type="submit" id="${ ACTION_AJOUT }" name="${ ACTION_AJOUT }" value="Ajouter un document">
+    </form>
+</div>

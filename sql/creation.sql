@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS mediatek.documents;
 DROP TABLE IF EXISTS mediatek.utilisateurs;
 DROP DATABASE IF EXISTS mediatek;
 
-CREATE DATABASE mediatek CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE mediatek CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE mediatek.utilisateurs (
     nom VARCHAR(32),

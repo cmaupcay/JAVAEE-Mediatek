@@ -70,4 +70,8 @@ public class DVD extends _Document
         this.realisateur = realisateur;
         this.adulte = adulte;
     }
+
+    @Override
+    public final String toString() 
+    { return "<i>" + this.titre + "</i> de " + this.realisateur + (this.adulte ? " <b>(+18)</b>" : ""); }
 }
