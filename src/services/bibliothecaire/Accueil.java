@@ -25,6 +25,8 @@ public class Accueil extends ServiceBibliothecaire
     {
     }
 
+    /** Nom et identifiant du boutton associé à l'action d'affichage de tous les documents. */
+    private static final String ACTION_DOCS = "docs";
     /** Nom et identifiant du boutton associé à l'action d'ajout d'un document. */
     private static final String ACTION_AJOUT = "ajouter";
 
@@ -33,13 +35,22 @@ public class Accueil extends ServiceBibliothecaire
     {
         // Récupération des documents disponibles.
         requete.setAttribute(PARAM_DOCUMENTS, APIDoc.metas(APIDoc.tousLesDocuments()));
+        requete.setAttribute("ACTION_DOCS", ACTION_DOCS);
         requete.setAttribute("ACTION_AJOUT", ACTION_AJOUT);
     }
 
     @Override
     protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
     {
-        final String ajout = requete.getParameter(ACTION_AJOUT);
-        if (ajout != null) Service.redirection("bib/ajout", false, requete, reponse);
+        String redirection = null;
+        String action = requete.getParameter(ACTION_DOCS);
+        if (action == null)
+        {
+            action = requete.getParameter(ACTION_AJOUT);
+            if (action != null) redirection = "ajout";
+        }
+        else redirection = "docs";
+
+        if (redirection != null) Service.redirection("bib/" + redirection, false, requete, reponse);
     }
 }

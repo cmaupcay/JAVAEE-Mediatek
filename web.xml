@@ -49,6 +49,10 @@
     <servlet-class>services.bibliothecaire.Accueil</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>BIB_Documents</servlet-name>
+    <servlet-class>services.bibliothecaire.Documents</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>BIB_Ajout</servlet-name>
     <servlet-class>services.bibliothecaire.Ajout</servlet-class>
   </servlet>
@@ -78,6 +82,10 @@
   <servlet-mapping>
     <servlet-name>BIB_Accueil</servlet-name>
     <url-pattern>/bib/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BIB_Documents</servlet-name>
+    <url-pattern>/bib/docs</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>BIB_Ajout</servlet-name>

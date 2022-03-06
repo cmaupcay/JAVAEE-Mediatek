@@ -1,10 +1,6 @@
-// TODO Liste des documents et disponibilités. 
-// TODO SI LE TEMPS Liste des utilisateurs et documents à rendre.
-
-<%@include file="../modules/docs.jsp" %>
-
-<div id="infos">
+<div id="action">
     <form method="post">
+        <input type="submit" id="${ ACTION_DOCS }" name="${ ACTION_DOCS }" value="Voir tous les documents">
         <input type="submit" id="${ ACTION_AJOUT }" name="${ ACTION_AJOUT }" value="Ajouter un document">
     </form>
 </div>

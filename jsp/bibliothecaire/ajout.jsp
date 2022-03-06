@@ -16,5 +16,8 @@
         <h5><c:out value="${ msg }"/></h5>
     </c:if>
     <input type="submit" id="${ ACTION_AJOUT }" name="${ ACTION_AJOUT }" value="Ajouter le document">
+</form>
+
+<form id="retour" method="post">
     <input type="submit" id="${ ACTION_RETOUR }" name="${ ACTION_RETOUR }" value="Retour">
 </form>

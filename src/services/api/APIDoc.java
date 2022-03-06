@@ -15,6 +15,9 @@ import mediatek2022.Utilisateur;
  */
 public abstract class APIDoc
 {
+    /** Tableau des types de document. */
+    public static final String[] TYPES = new String[]{ "DVD", "BlueRay" };
+    
     /**
      * Récupère les métadonnées d'un document depuis sa sérialisation.
      * @param doc Document à décomposer.
@@ -53,11 +56,14 @@ public abstract class APIDoc
     public static final int ADULTE = 5;
 
     /**
-     * Ajout des index des métadonnées dans une requête HTTP (utile aux JSP).
+     * Ajout des index des métadonnées et du tableau des types de document dans une requête HTTP (utile aux JSP).
      * @param requete Requête HTTP.
      */
     public static final void ajouter_attributs(HttpServletRequest requete)
     {
+        requete.setAttribute("TYPES", APIDoc.TYPES);
+        requete.setAttribute("N_TYPES", APIDoc.TYPES.length);
+
         requete.setAttribute("ID", ID);
         requete.setAttribute("TYPE", TYPE);
         requete.setAttribute("EMPRUNTEUR", EMPRUNTEUR);

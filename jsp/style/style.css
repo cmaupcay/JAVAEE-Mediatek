@@ -25,6 +25,7 @@ a:hover, h1, h2, h3, h4
 body
 {
     width: 100vw;
+    min-width: 1120px;
     height: 100vh;
     align-items: center;
     text-align: center;
@@ -81,6 +82,7 @@ section
     height: 64vh;
     background-color: var(--col-4);
     padding: 2rem 4rem;
+    overflow-y: scroll;
 }
 section form
 {
@@ -88,11 +90,16 @@ section form
     padding: 1rem 6rem;
     font-size: 1.2rem;
 }
+section form#retour
+{
+    padding: 0 6rem;
+}
+section form#retour input[type=submit] { margin: 0; }
 section form input, section button, section form select
 {
     text-align: center;
     color: var(--col-4);
-    margin: 1rem 0 2.4rem;
+    margin: 1rem 0 2.2rem;
     border-radius: 0.4rem;
     border: none;
 }
@@ -135,7 +142,7 @@ section div#infos h4
 {
     font-size: 1.4rem;
 }
-section div#doc h2
+section div#doc h2, section div#docs h2
 {
     text-transform: uppercase;
     letter-spacing: 0.3rem;
@@ -146,6 +153,44 @@ section div#doc h3
 {
     color: var(--col-0);
 }
+section div#docs table
+{
+    width: 100%;
+    margin: 0.5rem;
+    border-spacing: 0 0.5rem;
+}
+section div#docs table tr#doc:hover
+{
+    cursor: pointer;
+    transform: scale(1.02);
+}
+section div#docs table tr#doc:hover td
+{
+    color: var(--col-2);
+    background-color: var(--col-3);
+}
+section div#docs table tr th
+{
+    background-color: var(--col-2);
+    color: var(--col-3);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 0.3rem 0;
+}
+section div#docs table tr#doc td 
+{
+    height: 2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 0.1rem solid var(--col-2);
+}
+section div#docs table tr th#TYPE { width: 20% }
+section div#docs table tr th#TITRE { width: 40% }
+section div#docs table tr th#AUTEUR { width: 30% }
+section div#docs table tr th#ACCES { width: 10% }
+section div#docs table tr td#ACCES { font-size: 1.4rem; }
+section div#docs table tr td#TYPE { font-weight: bold; }
+section table tr form { padding: 0 2rem; }
+section table tr form input[type=submit] { margin: 1rem; }
 
 footer
 {

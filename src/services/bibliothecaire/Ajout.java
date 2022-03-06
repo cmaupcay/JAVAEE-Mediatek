@@ -3,6 +3,7 @@ package services.bibliothecaire;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import services.api.APIDoc;
 import services.base.Service;
 import services.base.ServiceBibliothecaire;
 
@@ -29,9 +30,6 @@ public class Ajout extends ServiceBibliothecaire
     /** Nom et identifiant du boutton associé à l'action d'ajout d'un document. */
     private static final String ACTION_AJOUT = "ajouter";
 
-    /** Tableau des types de document. */
-    private static final String[] TYPES = new String[]{ "DVD", "BlueRay" };
-
     /** Nom et identifiant du champs associé au type du document. */
     private static final String PARAM_POST_TYPE = "type";
     /** Nom et identifiant du champs associé au titre du document. */
@@ -46,9 +44,6 @@ public class Ajout extends ServiceBibliothecaire
     {
         requete.setAttribute("ACTION_AJOUT", ACTION_AJOUT);
         requete.setAttribute("ACTION_RETOUR", ACTION_RETOUR);
-
-        requete.setAttribute("TYPES", TYPES);
-        requete.setAttribute("N_TYPES", TYPES.length);
 
         requete.setAttribute("PARAM_POST_TYPE", PARAM_POST_TYPE);
         requete.setAttribute("PARAM_POST_TITRE", PARAM_POST_TITRE);

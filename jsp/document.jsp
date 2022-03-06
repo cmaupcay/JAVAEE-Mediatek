@@ -1,3 +1,9 @@
+<c:if test="${ msg != null }">
+    <div id="infos">
+            <h5><c:out value="${ msg }"/></h5>
+    </div>
+</c:if>
+
 <div id="doc">
     <h2>
         <c:if test="${ doc[ADULTE] == 'true'}">&#128286;</c:if>
@@ -22,8 +28,9 @@
         </c:when>
         <c:otherwise>
             <h4>Indisponible.</h4>
+            <c:if test="${ u.isBibliothecaire() }">
+                <h5>Emprunté par <i><c:out value="${ doc[EMPRUNTEUR] }"/></i></h5>
+            </c:if>
         </c:otherwise>
     </c:choose>
-
-    <c:if test="${ msg != null }"><p><c:out value="${ msg }"/></p></c:if>
 </div>
