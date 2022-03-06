@@ -72,7 +72,7 @@ public class Ajout extends ServiceBibliothecaire
                     {
                         final Boolean adulte = (adulte_s == null ? false : adulte_s.equals("on"));
                         synchronized(MEDIATHEQUE) { MEDIATHEQUE.ajoutDocument(type, titre, auteur, adulte); }
-                        msg = "Document ajoute !"; // TOFIX Problème d'affichage des caractères spéciaux (é).
+                        msg = "Document ajoute !";
                     }
                     else msg = "Informations manquantes...";
                 }
