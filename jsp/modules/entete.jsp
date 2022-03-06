@@ -19,7 +19,9 @@
 <body>
     <header>
         <div>
-            <h1>Mediatek</h1>
+            <h1 onclick="window.location.href = '${ RACINE }/'">
+                Mediatek
+            </h1>
             <c:if test="${ u != null }">
                 <h5>Connecté en tant que <i><c:out value="${ u.name() }"/></i></h5>
             </c:if>

@@ -83,7 +83,7 @@ public class MediathequeData implements PersistentMediatheque
 	}
 
 	/** Commande SQL de sélection des documents disponibles. */
-	private static final String SQL_DOCUMENTS = "SELECT * FROM `" + _Document.BD_TABLE + "` WHERE `" + _Document.BD_EMPRUNTEUR + "` IS NULL;";
+	private static final String SQL_DOCUMENTS = "SELECT * FROM `" + _Document.BD_TABLE + "` WHERE `" + _Document.BD_EMPRUNTEUR + "` IS NULL ORDER BY " + _Document.BD_ID + " DESC;";
 	/** Opération SQL préparée de sélection des documents disponibles. */
 	private PreparedStatement operation_documents;
 	@Override

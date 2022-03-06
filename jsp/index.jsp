@@ -1,5 +1,5 @@
 <div id="docs">
-    <h2>Documents diponibles</h2>
+    <h2>Documents disponibles</h2>
     <c:choose>
         <c:when test="${ docs.size() == 0 }">
             <h5>Aucun document disponible.</h5>
