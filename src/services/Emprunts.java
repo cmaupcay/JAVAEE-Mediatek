@@ -52,16 +52,20 @@ public class Emprunts extends ServiceAbonne
             else
             {
                 final Integer id_doc = Integer.parseInt(id_doc_s);
-                final Document doc = MEDIATHEQUE.getDocument(id_doc);
-                if (doc == null) msg = "Document inexistant.";
-                else
+                Document doc = null;
+                synchronized(MEDIATHEQUE) 
                 {
-                    try 
-                    { 
-                        MEDIATHEQUE.retour(doc, (Utilisateur)requete.getAttribute(PARAM_UTILISATEUR));
-                        msg = "Document retourne !";
+                    doc = MEDIATHEQUE.getDocument(id_doc);
+                    if (doc == null) msg = "Document inexistant.";
+                    else
+                    {
+                        try 
+                        { 
+                            MEDIATHEQUE.retour(doc, (Utilisateur)requete.getAttribute(PARAM_UTILISATEUR));
+                            msg = "Document retourne !";
+                        }
+                        catch (Exception e) { msg = e.getMessage(); }
                     }
-                    catch (Exception e) { msg = e.getMessage(); }
                 }
             }
             if (msg != null) requete.setAttribute(PARAM_MSG, msg);

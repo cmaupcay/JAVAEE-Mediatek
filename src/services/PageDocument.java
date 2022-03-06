@@ -52,7 +52,7 @@ public class PageDocument extends ServiceAbonne
             try
             {
                 final int id = Integer.parseInt(id_s);
-                return MEDIATHEQUE.getDocument(id);
+                synchronized(MEDIATHEQUE) { return MEDIATHEQUE.getDocument(id); }
             }
             catch (NumberFormatException e) { e.printStackTrace(); }
         }
@@ -85,7 +85,8 @@ public class PageDocument extends ServiceAbonne
             {
                 try 
                 { 
-                    MEDIATHEQUE.emprunt(doc, (Utilisateur)requete.getSession().getAttribute(ServiceAuthentification.PARAM_UTILISATEUR));
+                    synchronized(MEDIATHEQUE) 
+                    { MEDIATHEQUE.emprunt(doc, (Utilisateur)requete.getSession().getAttribute(ServiceAuthentification.PARAM_UTILISATEUR)); }
                     requete.setAttribute(PARAM_MSG, "Profitez bien de votre emprunt !");
                 }
                 catch (Exception e) { requete.setAttribute(PARAM_MSG, e.getMessage()); }

@@ -67,7 +67,8 @@ public class Connexion extends Service
         if (nom != null && mdp != null)
         {
             // Authentification.
-            final Utilisateur u = MEDIATHEQUE.getUser(nom, mdp);
+            Utilisateur u = null;
+            synchronized(MEDIATHEQUE) { u = MEDIATHEQUE.getUser(nom, mdp); }
             if (u != null)
             {
                 // Enregistrement de l'utilisateur en sesssion.

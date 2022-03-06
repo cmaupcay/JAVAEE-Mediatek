@@ -82,10 +82,14 @@ public abstract class APIDoc
         List<Document> docs = new ArrayList<>();
         int d = 1;
         Document doc = null;
-        while ((doc = Mediatheque.getInstance().getDocument(d)) != null)
+        final Mediatheque mediatheque = Mediatheque.getInstance();
+        synchronized(mediatheque)
         {
-            docs.add(doc);
-            d++;
+            while ((doc = mediatheque.getDocument(d)) != null)
+            {
+                docs.add(doc);
+                d++;
+            }
         }
         return docs;
     }
@@ -122,10 +126,14 @@ public abstract class APIDoc
         List<Document> docs = new ArrayList<>();
         int d = 1;
         Document doc = null;
-        while ((doc = Mediatheque.getInstance().getDocument(d)) != null)
+        final Mediatheque mediatheque = Mediatheque.getInstance();
+        synchronized(mediatheque)
         {
-            if (estEmprunteur(u, doc)) docs.add(doc);
-            d++;
+            while ((doc = Mediatheque.getInstance().getDocument(d)) != null)
+            {
+                if (estEmprunteur(u, doc)) docs.add(doc);
+                d++;
+            }
         }
         return docs;
     }

@@ -34,7 +34,8 @@ public class Accueil extends Service
     protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse) 
     {
         // Récupération de la liste des documents diponibles.
-        final List<String[]> documents = APIDoc.metas(MEDIATHEQUE.tousLesDocumentsDisponibles());
+        List<String[]> documents = null;
+        synchronized(MEDIATHEQUE) { documents = APIDoc.metas(MEDIATHEQUE.tousLesDocumentsDisponibles()); }
         requete.setAttribute(PARAM_DOCUMENTS, documents);
     }
 }
