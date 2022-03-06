@@ -1,15 +1,13 @@
-<c:if test="${ msg != null }">
-    <div id="infos">
-            <h5><c:out value="${ msg }"/></h5>
-    </div>
-</c:if>
-
 <div id="doc">
     <h2>
         <c:if test="${ doc[ADULTE] == 'true'}">&#128286;</c:if>
         <c:out value="${ doc[TITRE] }"/>
     </h2>
     <h3>de <c:out value="${ doc[AUTEUR] }"/></h3>
+    
+    <c:if test="${ msg != null }">
+        <h5><c:out value="${ msg }"/></h5>
+    </c:if>
 </div>
 
 <div id="infos">
