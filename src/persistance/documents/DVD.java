@@ -1,5 +1,7 @@
 package persistance.documents;
 
+import persistance.utilisateurs.Abonne;
+
 /**
  * Représentation d'un DVD.
  */
@@ -69,6 +71,13 @@ public class DVD extends _Document
         this.titre = titre;
         this.realisateur = realisateur;
         this.adulte = adulte;
+    }
+
+    @Override
+    protected void verifier_emprunt(final Abonne u) throws Exception
+    {
+        if (this.adulte && u.age() < Abonne.AGE_ADULTE)
+            throw new Exception("Ce document est interdit aux enfants !");
     }
 
     @Override

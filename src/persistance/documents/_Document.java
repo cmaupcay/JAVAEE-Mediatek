@@ -3,6 +3,7 @@ package persistance.documents;
 import mediatek2022.Document;
 import mediatek2022.Utilisateur;
 import persistance.MediathequeData;
+import persistance.utilisateurs.Abonne;
 
 /**
  * Classe de base des documents implémentés.
@@ -57,11 +58,24 @@ public abstract class _Document implements Document
         this.emprunteur = emprunteur;
     }
 
+    /**
+     * Vérifie que le document peut être emprunté par l'abonné.
+     * @param u Utilisateur cible.
+     * @throws Exception Le document ne peut être emprunté par cet utilisateur.
+     */
+    protected abstract void verifier_emprunt(final Abonne u) throws Exception;
+
     @Override
     public final void emprunt(Utilisateur u) throws Exception
     {
         if (this.disponible())
         {
+            if (u.isBibliothecaire()) 
+                throw new Exception("Vous ne pouvez pas emprunter des documents avec ce compte !");
+            final Abonne abonne = (Abonne)u;
+            if (!abonne.abonnement_actif()) throw new Exception("Votre abonnement n'est pas actif.");
+            this.verifier_emprunt(abonne);
+
             this.emprunteur = u.name();
             // Mise à jour de l'état du document
             MediathequeData.getInstance().majDocument(this);

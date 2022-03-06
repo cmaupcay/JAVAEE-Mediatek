@@ -61,8 +61,8 @@ public abstract class APIDoc
      */
     public static final void ajouter_attributs(HttpServletRequest requete)
     {
-        requete.setAttribute("TYPES", APIDoc.TYPES);
-        requete.setAttribute("N_TYPES", APIDoc.TYPES.length);
+        requete.setAttribute("TYPES", TYPES);
+        requete.setAttribute("N_TYPES", TYPES.length);
 
         requete.setAttribute("ID", ID);
         requete.setAttribute("TYPE", TYPE);

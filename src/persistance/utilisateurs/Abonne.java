@@ -18,6 +18,8 @@ public class Abonne extends _Utilisateur
         this.data.add(abonnement_actif);
     }
 
+    /** Défini l'age à partir du quel on considère un abonné comme adulte. */
+    public static final int AGE_ADULTE = 18;
     /** Nom de la colonne de la table SQL associée à l'age de l'utilisateur. */
     public static final String BD_AGE = "age";
     /** Index de l'âge de l'utilisateur dans la liste des informations complémentaires.  */
