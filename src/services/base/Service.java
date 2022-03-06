@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mediatek2022.*;
-import services.APIDoc;
+import services.api.APIDoc;
 
 /**
  * Classe de base des services de la médiathèque.
@@ -118,7 +118,9 @@ public abstract class Service extends HttpServlet
         if (this.accepter(requete, reponse))
         {
             requete.setAttribute(PARAM_RACINE, requete.getContextPath()); // Définition de la racine de la plateforme web pour les JSP.
-            requete.setAttribute(PARAM_PAGE, requete.getServletPath().substring(1)); // Définition de la page web actuelle pour les JSP.
+            // Définition de la page web actuelle pour les JSP.
+            final String query = requete.getQueryString();
+            requete.setAttribute(PARAM_PAGE, requete.getServletPath().substring(1) + (query == null ? "" : "?" + query)); 
 
             APIDoc.ajouter_attributs(requete);
             this.pre_page(requete, reponse);

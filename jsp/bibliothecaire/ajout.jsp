@@ -13,7 +13,7 @@
     <input type="checkbox" name="${ PARAM_POST_ADULTE }" id="${ PARAM_POST_ADULTE }">
 
     <c:if test="${ msg != null }">
-        <h4><c:out value="${ msg }"/></h4>
+        <h5><c:out value="${ msg }"/></h5>
     </c:if>
     <input type="submit" id="${ ACTION_AJOUT }" name="${ ACTION_AJOUT }" value="Ajouter le document">
     <input type="submit" id="${ ACTION_RETOUR }" name="${ ACTION_RETOUR }" value="Retour">

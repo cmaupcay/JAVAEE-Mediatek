@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import mediatek2022.Document;
 import mediatek2022.Utilisateur;
+import services.api.APIDoc;
 import services.base.Service;
 import services.base.ServiceAbonne;
 import services.base.ServiceAuthentification;
@@ -69,7 +70,7 @@ public class PageDocument extends ServiceAbonne
         else
         {
             try { reponse.sendError(404, "Document introuvable."); }
-            catch (IOException e) { e.printStackTrace(); }
+            catch (Exception e) { e.printStackTrace(); }
         }
     }
 

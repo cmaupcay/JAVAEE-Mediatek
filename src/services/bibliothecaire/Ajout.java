@@ -57,7 +57,6 @@ public class Ajout extends ServiceBibliothecaire
 
     }
 
-
     @Override
     protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
     {
@@ -73,11 +72,12 @@ public class Ajout extends ServiceBibliothecaire
                     final int type = Integer.parseInt(requete.getParameter(PARAM_POST_TYPE));
                     final String titre = requete.getParameter(PARAM_POST_TITRE);
                     final String auteur = requete.getParameter(PARAM_POST_AUTEUR);
-                    final Boolean adulte = Boolean.parseBoolean(requete.getParameter(PARAM_POST_ADULTE));
-                    if (titre != null && auteur != null && adulte != null)
+                    final String adulte_s = requete.getParameter(PARAM_POST_ADULTE);
+                    if (titre != null && auteur != null)
                     {
+                        final Boolean adulte = (adulte_s == null ? false : adulte_s.equals("on"));
                         MEDIATHEQUE.ajoutDocument(type, titre, auteur, adulte);
-                        msg = "Document ajouté !";
+                        msg = "Document ajoute !"; // TOFIX Problème d'affichage des caractères spéciaux (é).
                     }
                     else msg = "Informations manquantes...";
                 }

@@ -1,4 +1,4 @@
-
+<% // Affichage d'une liste de documents. %>
 <div id="docs">
     <h3>Documents</h3>
     <ul>

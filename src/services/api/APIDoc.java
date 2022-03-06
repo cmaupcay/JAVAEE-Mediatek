@@ -1,4 +1,4 @@
-package services;
+package services.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +107,7 @@ public abstract class APIDoc
     /**
      * Retourne la liste des documents empruntés par un utilisateur.
      * ATTENTION : cette méthode est très gourmante et est à éviter.
+     * NOTE : la suite des identifiants numériques des documents doit être continue (pas de suppression).
      * @param u Utilisateur cible.
      * @return Liste des documents empruntés actuellement par l'utilisateur.
      */

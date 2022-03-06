@@ -3,6 +3,7 @@ package services.bibliothecaire;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import services.api.APIDoc;
 import services.base.Service;
 import services.base.ServiceBibliothecaire;
 
@@ -31,10 +32,8 @@ public class Accueil extends ServiceBibliothecaire
     protected void pre_page(HttpServletRequest requete, HttpServletResponse reponse) 
     {
         // Récupération des documents disponibles.
-        requete.setAttribute(PARAM_DOCUMENTS, MEDIATHEQUE.tousLesDocumentsDisponibles());
-        
+        requete.setAttribute(PARAM_DOCUMENTS, APIDoc.metas(APIDoc.tousLesDocuments()));
         requete.setAttribute("ACTION_AJOUT", ACTION_AJOUT);
-
     }
 
     @Override

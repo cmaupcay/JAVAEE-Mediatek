@@ -49,7 +49,7 @@
                             </c:otherwise>
                         </c:choose>
                         <li>
-                            <a href="${ RACINE }/deconnexion">Déconnexion</a>
+                            <a href="${ RACINE }/deconnexion?redirect=${ PAGE }">Déconnexion</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
