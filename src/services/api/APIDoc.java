@@ -16,7 +16,7 @@ import mediatek2022.Utilisateur;
 public abstract class APIDoc
 {
     /** Tableau des types de document. */
-    public static final String[] TYPES = new String[]{ "DVD", "BlueRay" };
+    public static final String[] TYPES = new String[]{ "DVD", "Blu-Ray" };
     
     /**
      * Récupère les métadonnées d'un document depuis sa sérialisation.

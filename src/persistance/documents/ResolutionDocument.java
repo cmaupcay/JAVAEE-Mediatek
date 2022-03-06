@@ -29,14 +29,14 @@ public abstract class ResolutionDocument
 
             switch (type)   // Résolution selon le type.
             {
-            // Les DVDs et BlueRay ont le même constructeur.
+            // Les DVDs et Blu-Ray ont le même constructeur.
             case DVD.TYPE:
-            case BlueRay.TYPE:
+            case BluRay.TYPE:
                 final String titre = resultat.getString(DVD.BD_TITRE);              // Récupération du titre du film.
                 final String realisateur = resultat.getString(DVD.BD_REALISATEUR);  // Récupération du réaliateur.
                 final boolean adulte = resultat.getBoolean(DVD.BD_ADULTE);          // Récupération du drapeau ADULTE.
                 // Renvoi d'une nouvelle instance de la classe de document, selon le type résolu.
-                if (type == BlueRay.TYPE) return new BlueRay(id, emprunteur, titre, realisateur, adulte);
+                if (type == BluRay.TYPE) return new BluRay(id, emprunteur, titre, realisateur, adulte);
                 else return new DVD(id, emprunteur, titre, realisateur, adulte);
 
             default:
@@ -60,7 +60,7 @@ public abstract class ResolutionDocument
         switch (type)
         {
         case DVD.TYPE:
-        case BlueRay.TYPE:
+        case BluRay.TYPE:
             operation.setString(MediathequeData.SQL_DOCUMENT_AJOUT_TITRE, (String)args[0]);     // Titre
             operation.setString(MediathequeData.SQL_DOCUMENT_AJOUT_AUTEUR, (String)args[1]);    // Réalisateur
             operation.setBoolean(MediathequeData.SQL_DOCUMENT_AJOUT_ADULTE, (Boolean)args[2]);  // Adulte ou non

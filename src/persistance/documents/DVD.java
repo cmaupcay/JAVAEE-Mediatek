@@ -41,7 +41,7 @@ public class DVD extends _Document
     public final boolean adulte() { return this.adulte; }
     
     /**
-     * Construction d'un DVD pour les DVD plus spécialisés (ex: BlueRay).
+     * Construction d'un DVD pour les DVD plus spécialisés (ex: Blu-Ray).
      * @param id Identifiant numérique du document.
      * @param type Identifiant numérique du type du document.
      * @param emprunteur Emprunteur du document, null si disponible.

@@ -12,7 +12,7 @@ INSERT INTO mediatek.utilisateurs (nom, mdp, bibliothecaire, age, abonnement_act
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "Star Wars - Un nouvel espoir", "Georges Lucas", 0);
 /* DVD pour adulte */
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "La Bibliothecaire", "Jacquie & Michel", 1);
-/* Blue-Ray */
+/* Blu-Ray */
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (1, "Star Wars - La Menace fantome", "Georges Lucas", 0);
 
 /* Population dans un ordre aléatoire. */
@@ -32,5 +32,13 @@ INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "Star Wa
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (1, "Star Wars - Le Reveil de la Force", "J. J. Abrams", 0);
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (0, "La Secretaire", "Jacquie & Michel", 1);
 INSERT INTO mediatek.documents (type, titre, auteur, adulte) VALUES (1, "OSS 117 - Alerte rouge en Afrique noire", "Nicolas Bedos", 0);
+
+/* EMPRUNTS */
+/* Clément M emprunte les 3 DVD OSS 117 : */
+UPDATE mediatek.documents SET emprunteur = "clement.m" WHERE id = 4;
+UPDATE mediatek.documents SET emprunteur = "clement.m" WHERE id = 10;
+UPDATE mediatek.documents SET emprunteur = "clement.m" WHERE id = 15;
+/* Clément P emprunte le Blu-Ray de Star Wars I : */
+UPDATE mediatek.documents SET emprunteur = "clement.m" WHERE id = 3;
 
 COMMIT;
