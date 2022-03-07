@@ -20,14 +20,17 @@ then
 fi
 cp -r ../jsp $DESTINATION/
 
-if [ ! -f $DESTINATION/lib/mediatek.jar ]
+echo "Exportation des librairies..."
+if [ -d $DESTINATION/lib ]
 then
-    echo "Exportation de la librairie Mediatek..."
-    if [ ! -d $DESTINATION/lib ]
-    then
-        mkdir $DESTINATION/lib
-    fi
-    cp ../lib/mediatek.jar $DESTINATION/lib/
+    rm -rf $DESTINATION/lib
+fi
+cp -r ../lib $DESTINATION/lib
+if [ $? -eq 0 ]
+then
+    rm $DESTINATION/lib/servlet-api.jar
+else
+    echo "La copie a échoué."
 fi
 
 echo "Fini."
