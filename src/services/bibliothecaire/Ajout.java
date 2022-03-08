@@ -3,7 +3,6 @@ package services.bibliothecaire;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import services.api.APIDoc;
 import services.base.Service;
 import services.base.ServiceBibliothecaire;
 
