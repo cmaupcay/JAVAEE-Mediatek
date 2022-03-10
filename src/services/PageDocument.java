@@ -25,14 +25,19 @@ public class PageDocument extends ServiceAbonne
 
     /** Paramètre définissant l'identifiant numérique du document à afficher. */
     private static final String PARAM_ID = "id";
+    /** Paramètre indiquant au fichier JSP si l'utilisateur courant est l'emprunteur du document. */
+    private static final String PARAM_EST_EMPRUNTEUR = "emprunteur";
 
     /** Nom et identifiant du boutton associé à l'action EMPRUNTER. */
     private static final String ACTION_EMPRUNTER = "emprunter";
+    /** Nom et identifiant du boutton associé à l'action RETOURNER. */
+    private static final String ACTION_RETOURNER = "retourner";
 
     @Override
     protected void pre(HttpServletRequest requete, HttpServletResponse reponse) 
     {
         requete.setAttribute("ACTION_EMPRUNTER", ACTION_EMPRUNTER);
+        requete.setAttribute("ACTION_RETOURNER", ACTION_RETOURNER);
     }
 
     /**
@@ -64,7 +69,12 @@ public class PageDocument extends ServiceAbonne
         // Récupération dans la médiathèque depuis l'identifiant.
         final Document doc = this.recuperer_document(requete, reponse);
         if (doc != null) // Enregistrement des métadonnées en tant qu'attribut de requête.
+        {
             requete.setAttribute(PARAM_DOCUMENT, APIDoc.meta(doc));
+            requete.setAttribute(PARAM_EST_EMPRUNTEUR, APIDoc.estEmprunteur(
+                (Utilisateur)requete.getSession().getAttribute(ServiceAuthentification.PARAM_UTILISATEUR), doc
+            ));            
+        }
         else
         {
             try { reponse.sendError(404, "Document introuvable."); }
@@ -75,8 +85,13 @@ public class PageDocument extends ServiceAbonne
     @Override
     protected void POST(HttpServletRequest requete, HttpServletResponse reponse)
     {
-        final String emprunter = requete.getParameter(ACTION_EMPRUNTER);
-        if (emprunter != null)
+        if (requete.getParameter(ACTION_EMPRUNTER) == null)
+        {
+            // Déléguation au service de gestion des emprunts.
+            if (requete.getParameter(ACTION_RETOURNER) != null)
+                Service.redirection("emprunts", false, requete, reponse);
+        }
+        else
         {
             final Document doc = this.recuperer_document(requete, reponse);
             if (doc != null)

@@ -25,10 +25,19 @@
             </c:choose>
         </c:when>
         <c:otherwise>
-            <h4>Indisponible.</h4>
-            <c:if test="${ u.isBibliothecaire() }">
-                <h5>Emprunté par <i><c:out value="${ doc[EMPRUNTEUR] }"/></i></h5>
-            </c:if>
+            <c:choose>
+                <c:when test="${ emprunteur }">
+                    <form method="post">
+                        <input type="submit" id="${ ACTION_RETOURNER }" name="${ ACTION_RETOURNER }" value="RETOURNER">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <h4>Indisponible.</h4>
+                    <c:if test="${ u.isBibliothecaire() }">
+                        <h5>Emprunté par <i><c:out value="${ doc[EMPRUNTEUR] }"/></i></h5>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
         </c:otherwise>
     </c:choose>
 </div>
